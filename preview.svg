@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="gbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fce8f0"/>
+      <stop offset="50%" stop-color="#f0f4fd"/>
+      <stop offset="100%" stop-color="#e8f4fc"/>
+    </linearGradient>
+    <linearGradient id="gtitle" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d9607a"/>
+      <stop offset="100%" stop-color="#4a8fb5"/>
+    </linearGradient>
+    <linearGradient id="gname" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d9607a"/>
+      <stop offset="100%" stop-color="#4a8fb5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#gbg)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="-80" cy="-60" r="280" fill="#f0a0b8" opacity="0.1"/>
+  <circle cx="1280" cy="690" r="300" fill="#90bfe0" opacity="0.1"/>
+  <circle cx="160"  cy="520" r="140" fill="#f0a0b8" opacity="0.07"/>
+  <circle cx="1050" cy="110" r="170" fill="#90bfe0" opacity="0.07"/>
+  <circle cx="600"  cy="315" r="380" fill="white"   opacity="0.04"/>
+
+  <!-- Border bars -->
+  <rect x="0"    y="0"   width="1200" height="7" fill="url(#gtitle)"/>
+  <rect x="0"    y="623" width="1200" height="7" fill="url(#gtitle)"/>
+  <rect x="0"    y="7"   width="7"   height="616" fill="url(#gtitle)" opacity="0.5"/>
+  <rect x="1193" y="7"   width="7"   height="616" fill="url(#gtitle)" opacity="0.5"/>
+
+  <!-- Eyebrow -->
+  <text x="600" y="148"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="22" text-anchor="middle"
+        fill="#6a6a8a" letter-spacing="7">CELEBRA CON NOSOTROS</text>
+
+  <!-- Main title -->
+  <text x="600" y="268"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="100" font-weight="bold"
+        text-anchor="middle" fill="url(#gtitle)">Baby Shower</text>
+
+  <!-- "de" -->
+  <text x="600" y="318"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="24" text-anchor="middle"
+        fill="#6a6a8a" letter-spacing="5">de mamá · para su tercer bebé</text>
+
+  <!-- Name -->
+  <text x="600" y="406"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="74" font-style="italic"
+        text-anchor="middle" fill="url(#gname)">Jessica Euan</text>
+
+  <!-- Divider line -->
+  <line x1="280" y1="432" x2="920" y2="432" stroke="url(#gtitle)" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- Decorative dots on divider -->
+  <circle cx="280" cy="432" r="4" fill="#d9607a" opacity="0.5"/>
+  <circle cx="920" cy="432" r="4" fill="#4a8fb5" opacity="0.5"/>
+  <circle cx="600" cy="432" r="3" fill="#c9a43a" opacity="0.6"/>
+
+  <!-- Date & time -->
+  <text x="600" y="492"
+        font-family="Arial,Helvetica,sans-serif"
+        font-size="28" text-anchor="middle"
+        fill="#2d3d5c" letter-spacing="2">Domingo 24 de Mayo 2026  ·  6:00 PM</text>
+
+  <!-- Footer text -->
+  <text x="600" y="575"
+        font-family="Arial,Helvetica,sans-serif"
+        font-size="16" text-anchor="middle"
+        fill="#6a6a8a" opacity="0.55" letter-spacing="5">· BABY SHOWER · JESSICA EUAN · 2026 ·</text>
+</svg>
