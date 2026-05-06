@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Generar preview.png · Baby Shower</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background:#0d1117;
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; min-height:100vh; padding:24px;
+  font-family:Arial,sans-serif;
+}
+canvas { max-width:100%; border-radius:10px; box-shadow:0 12px 40px rgba(0,0,0,.6); }
+.info {
+  color:#8b8b9a; font-size:.82rem; margin-top:16px;
+  text-align:center; line-height:1.9;
+}
+.info strong { color:#f0a0b8; }
+.btn {
+  margin-top:16px; padding:12px 32px;
+  background:linear-gradient(135deg,#d9607a,#4a8fb5);
+  color:#fff; border:none; border-radius:50px;
+  font-size:.9rem; cursor:pointer; font-family:inherit;
+}
+</style>
+</head>
+<body>
+<canvas id="cv" width="1200" height="630"></canvas>
+<p class="info">
+  Descargando <strong>preview.png</strong> automáticamente…<br>
+  Si no descarga, usa el botón de abajo o haz clic derecho → "Guardar imagen como"<br>
+  Luego sube <strong>preview.png</strong> al repositorio de GitHub.
+</p>
+<button class="btn" onclick="dl()">⬇ Descargar preview.png</button>
+
+<script>
+var cv  = document.getElementById('cv');
+var ctx = cv.getContext('2d');
+var W = 1200, H = 630;
+
+function star(cx, cy, r1, r2, pts) {
+  ctx.beginPath();
+  for (var i = 0; i < pts * 2; i++) {
+    var r = (i % 2 === 0) ? r2 : r1;
+    var a = (i * Math.PI / pts) - Math.PI / 2;
+    ctx.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r);
+  }
+  ctx.closePath();
+  ctx.fill();
+}
+
+function draw() {
+  /* ── background ── */
+  var bg = ctx.createLinearGradient(0, 0, W, H);
+  bg.addColorStop(0,   '#1a2538');
+  bg.addColorStop(0.5, '#2d3d5c');
+  bg.addColorStop(1,   '#1a3550');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  /* pink glow top-left */
+  var g1 = ctx.createRadialGradient(80, 80, 0, 80, 80, 500);
+  g1.addColorStop(0, 'rgba(240,160,184,0.22)');
+  g1.addColorStop(1, 'rgba(240,160,184,0)');
+  ctx.fillStyle = g1; ctx.fillRect(0, 0, W, H);
+
+  /* blue glow bottom-right */
+  var g2 = ctx.createRadialGradient(1120, 550, 0, 1120, 550, 500);
+  g2.addColorStop(0, 'rgba(144,191,224,0.22)');
+  g2.addColorStop(1, 'rgba(144,191,224,0)');
+  ctx.fillStyle = g2; ctx.fillRect(0, 0, W, H);
+
+  /* dot texture */
+  ctx.fillStyle = 'rgba(255,255,255,0.023)';
+  for (var x = 28; x < W; x += 34)
+    for (var y = 28; y < H; y += 34) {
+      ctx.beginPath(); ctx.arc(x, y, 1.1, 0, Math.PI * 2); ctx.fill();
+    }
+
+  /* border bars */
+  var bar = ctx.createLinearGradient(0, 0, W, 0);
+  bar.addColorStop(0, '#d9607a'); bar.addColorStop(1, '#4a8fb5');
+  ctx.fillStyle = bar;
+  ctx.fillRect(0,     0, W,  6);
+  ctx.fillRect(0, H - 6, W,  6);
+  ctx.globalAlpha = 0.45;
+  ctx.fillRect(0,     6, 6, H - 12);
+  ctx.fillRect(W - 6, 6, 6, H - 12);
+  ctx.globalAlpha = 1;
+
+  /* pink stars */
+  ctx.fillStyle = 'rgba(240,160,184,0.55)';
+  [[308,108],[892,110],[178,422],[1028,158],[558,76]].forEach(function(p){ star(p[0],p[1],5,12,5); });
+  ctx.fillStyle = 'rgba(240,160,184,0.3)';
+  [[238,172],[958,402],[462,542]].forEach(function(p){ star(p[0],p[1],3,7,5); });
+
+  /* blue stars */
+  ctx.fillStyle = 'rgba(144,191,224,0.5)';
+  [[418,134],[782,120],[138,288],[1058,288],[638,548]].forEach(function(p){ star(p[0],p[1],4,10,5); });
+  ctx.fillStyle = 'rgba(144,191,224,0.3)';
+  [[328,232],[868,232],[498,82]].forEach(function(p){ star(p[0],p[1],3,7,5); });
+
+  /* gold sparkles */
+  ctx.fillStyle = 'rgba(201,164,58,0.45)';
+  [[255,208],[948,218],[600,556]].forEach(function(p){ star(p[0],p[1],3,7,5); });
+
+  ctx.textAlign = 'center';
+
+  /* eyebrow */
+  ctx.font      = '22px Georgia,serif';
+  ctx.fillStyle = 'rgba(240,160,184,0.62)';
+  ctx.fillText('Celebra con nosotros el', W / 2, 140);
+
+  /* main title */
+  ctx.font = 'italic bold 112px Georgia,serif';
+  var tg = ctx.createLinearGradient(W/2 - 420, 0, W/2 + 420, 0);
+  tg.addColorStop(0, '#f0a0b8'); tg.addColorStop(0.5, '#ffffff'); tg.addColorStop(1, '#90bfe0');
+  ctx.fillStyle = tg;
+  ctx.fillText('Baby Shower', W / 2, 282);
+
+  /* divider */
+  var dg = ctx.createLinearGradient(260, 0, 940, 0);
+  dg.addColorStop(0,    'transparent');
+  dg.addColorStop(0.12, 'rgba(240,160,184,0.55)');
+  dg.addColorStop(0.88, 'rgba(144,191,224,0.55)');
+  dg.addColorStop(1,    'transparent');
+  ctx.strokeStyle = dg; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(260, 322); ctx.lineTo(940, 322); ctx.stroke();
+
+  /* "en honor a" */
+  ctx.font      = '22px Georgia,serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.38)';
+  ctx.fillText('en honor a', W / 2, 362);
+
+  /* name */
+  ctx.font = 'italic 80px Georgia,serif';
+  var ng = ctx.createLinearGradient(W/2 - 300, 0, W/2 + 300, 0);
+  ng.addColorStop(0, '#f0a0b8'); ng.addColorStop(1, '#90bfe0');
+  ctx.fillStyle = ng;
+  ctx.fillText('Jessica Euan', W / 2, 452);
+
+  /* date */
+  ctx.font      = '27px Georgia,serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.65)';
+  ctx.fillText('Domingo 24 de Mayo 2026  ·  6:00 PM', W / 2, 516);
+
+  /* footer */
+  ctx.font      = '15px Arial,sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.28)';
+  ctx.fillText('· BABY SHOWER · JESSICA EUAN · 2026 ·', W / 2, 590);
+}
+
+function dl() {
+  var a = document.createElement('a');
+  a.download = 'preview.png';
+  a.href = cv.toDataURL('image/png', 1.0);
+  a.click();
+}
+
+draw();
+setTimeout(dl, 900);
+</script>
+</body>
+</html>
