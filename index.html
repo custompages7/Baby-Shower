@@ -95,8 +95,11 @@ body {
 #wrapper {
   position:relative; z-index:10;
   width:min(430px,96vw);
+  min-height:calc(100vh - 110px);
   display:flex; flex-direction:column; align-items:center;
+  justify-content:center;
 }
+#wrapper.card-open { justify-content:flex-start; }
 
 /* ══ ENVELOPE ══ */
 #envelope {
@@ -785,6 +788,7 @@ function openEnvelope(){
   var card=document.getElementById('card');
   var hint=document.getElementById('tapHint');
   var burst=document.getElementById('light-burst');
+  document.getElementById('wrapper').classList.add('card-open');
   env.style.cursor='default';env.onclick=null;hint.style.display='none';
   setTimeout(function(){flap.classList.add('open');seal.classList.add('gone');},80);
   setTimeout(function(){peek.classList.add('visible');},850);
@@ -794,9 +798,9 @@ function openEnvelope(){
     setTimeout(function(){burst.classList.remove('flash');},350);
     peek.classList.remove('visible');
     card.classList.add('show');
-    setTimeout(function(){card.scrollIntoView({behavior:'smooth',block:'start'});},200);
   },1200);
   setTimeout(function(){env.classList.add('fade-away');},1700);
+  setTimeout(function(){window.scrollTo({top:0,behavior:'smooth'});},1850);
   setTimeout(function(){popHearts();confetti(62);},1500);
   setTimeout(function(){startMusic();},2000);
   setTimeout(function(){startCD();initStagger();},2100);
@@ -831,6 +835,7 @@ function closeCard(){
     env.classList.remove('fade-away');
     flap.classList.remove('open');seal.classList.remove('gone');
     hint.style.display='';
+    document.getElementById('wrapper').classList.remove('card-open');
     setTimeout(function(){env.onclick=openEnvelope;env.style.cursor='pointer';opened=false;},800);
   },760);
 }
